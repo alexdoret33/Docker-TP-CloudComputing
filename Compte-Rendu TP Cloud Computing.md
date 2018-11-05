@@ -53,8 +53,10 @@ HOP ! L'application python est déployée sur le cluster !
 Création du compte Weave Cloud, puis nouvelle instance qui nous donne un service token. 
 Ce service token est à mettre dans cette commande: `docker run -it --rm     -v /var/run/docker.sock:/var/run/docker.sock     weaveworks/swarm-agents install [service-token]`
 Éxecuter ces commandes:
-`sudo curl -L git.io/scope -o /usr/local/bin/scope
+```
+sudo curl -L git.io/scope -o /usr/local/bin/scope
 sudo chmod a+x /usr/local/bin/scope
-scope launch --service-token=z6n7dqmjt5cd5f4duwr5oy4xqd4byug5`
+scope launch --service-token=z6n7dqmjt5cd5f4duwr5oy4xqd4byug5
+
 Selectionner l'environnement et atendre que cela termine l'installation dans les VMs.
 
