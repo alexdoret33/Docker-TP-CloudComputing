@@ -1,0 +1,17 @@
+Compte-Rendu TP Cloud Computing
+
+Récupération du dépôt Git
+Modification du Vagrantfile pour l'ajout d'un disque de 10gb et l'ajout d'une interface bridgé pour la connection Ethernet.
+Création de trois machines avec le Vagrantfile.
+Nos machines sont bien reliées avec un câble et sont bien dans le même réseau et ont pour adresse IP 192.168.10.1 et 192.168.10.2 avec un /24.
+Elles se Ping parfaitement bien.
+Nous allons répartir les services sur nos deux VMs
+
+Création du fichier dans /etc/docker deamon.json avec à l'interieur 
+{
+        "experimental":true
+        "metrics-addr":"0.0.0.0:9323"
+}
+Sur core-01 (Le premier manager), nous avons exectuté cette commande: docker swarm init --advertise-addr 172.17.8.101
+Cette commande génère une commande à executer en root dans core-02 et core-03: docker swarm join-token manager
+Core-01, core-02, core-03 ont bien rejoint le Swarm
