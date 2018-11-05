@@ -21,7 +21,7 @@ Core-01, core-02, core-03 core-11 et core-12 ont bien rejoint le Swarm.
 ![](https://i.imgur.com/LuN7SSq.png)
 
 
-## déploiement d'application sur le swarm
+## Déploiement d'application sur le Swarm
 
 Nous sommes passés directement à la partie NFS car la connexion réseau était déplorable et il était trop contraignant de télécharger les images 5 fois.
 Nous avons récupéré le dépôt git de l'application.
@@ -47,3 +47,14 @@ On push les images : `docker-compose push`
 et on déploie l'application : `docker stack deploy -c docker-compose.yml pyapp`
 
 HOP ! L'application python est déployée sur le cluster !
+
+## Installation et configuration de Weave Cloud
+
+Création du compte Weave Cloud, puis nouvelle instance qui nous donne un service token. 
+Ce service token est à mettre dans cette commande: `docker run -it --rm     -v /var/run/docker.sock:/var/run/docker.sock     weaveworks/swarm-agents install [service-token]`
+Éxecuter ces commandes:
+`sudo curl -L git.io/scope -o /usr/local/bin/scope
+sudo chmod a+x /usr/local/bin/scope
+scope launch --service-token=z6n7dqmjt5cd5f4duwr5oy4xqd4byug5`
+Selectionner l'environnement et atendre que cela termine l'installation dans les VMs.
+
