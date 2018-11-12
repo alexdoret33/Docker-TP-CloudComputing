@@ -60,3 +60,53 @@ scope launch --service-token=z6n7dqmjt5cd5f4duwr5oy4xqd4byug5
 
 Selectionner l'environnement et atendre que cela termine l'installation dans les VMs.
 
+## NFS
+
+Pour créer un dossier partagé, on a utilisé une machine sous centOS avec l'IP suivante : 172.17.8.150 (afin qu'elle soit sur le même réseau mais avec une IP reconnaissable)
+Tout d'abord, on install l'utilitaire NFS : 
+```
+yum install nfs-utils
+```
+
+on crée le dossier que l'on va partager : 
+```
+mkdir /data
+```
+On change ses permissions : 
+```
+chmod -R 755 /data
+chown nfsnobody:nfsnobody /data
+```
+On active et lance les services NFS à l'aide des commandes :
+```
+systemctl enable rpcbind
+systemctl enable nfs-server
+systemctl enable nfs-lock
+systemctl enable nfs-idmap
+systemctl start rpcbind
+systemctl start nfs-server
+systemctl start nfs-lock
+systemctl start nfs-idmap
+```
+On configure le fichier /etc/exports pour déterminer avec qui partager le dossier. ici, tous les postes sur le réseau : 
+```
+/srv/data   172.17.8.*/24(rw,sync,no_root_squash,no_all_squash)
+```
+Puis, on relance le service et on paramètre le firewall pour les services NFS: 
+```
+systemctl restart nfs-server
+
+firewall-cmd --permanent --zone=public --add-service=nfs
+firewall-cmd --permanent --zone=public --add-service=mountd
+firewall-cmd --permanent --zone=public --add-service=rpc-bind
+firewall-cmd --reload
+```
+
+Voilà pour la machine CentOS. Ensuite, il faut paramétrer les clients (coreOS). Pour celà, on modifie le fichier conf.ign pour que le vagrantfile configure les machines au démarrage. On ajoute dans le fichier : 
+```
+{
+        "contents": "[Unit]\nBefore=remote-fs.target\n[Mount]\nWhat=172.17.8.150:/srv/data\nWhere=data\nType=nfs\n[Install]\nWantedBy=remote-fs.target",
+        "enable": true,
+        "name": "data.mount"
+      }
+```
