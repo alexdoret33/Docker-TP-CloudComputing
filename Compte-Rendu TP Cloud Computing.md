@@ -59,6 +59,7 @@ sudo chmod a+x /usr/local/bin/scope
 scope launch --service-token=z6n7dqmjt5cd5f4duwr5oy4xqd4byug5
 
 Selectionner l'environnement et atendre que cela termine l'installation dans les VMs.
+```
 
 ## NFS
 
