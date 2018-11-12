@@ -60,6 +60,20 @@ scope launch --service-token=z6n7dqmjt5cd5f4duwr5oy4xqd4byug5
 
 Selectionner l'environnement et atendre que cela termine l'installation dans les VMs.
 ```
+## Keepalived
+
+Pour configurer Keepalived et rendre notre cluster accessible avec une seule adresse IP, il faut utiliser la commande suivante : 
+```
+docker run -d --name keepalived --restart=always \
+  --cap-add=NET_ADMIN --net=host \
+  -e KEEPALIVED_VIRTUAL_IPS=172.17.8.100 \ #défini une adresse virtuelle
+  -e KEEPALIVED_UNICAST_PEERS="#PYTHON2BASH:['172.17.8.101', '172.17.8.102', '172.17.8.103', '172.17.8.201', '172.17.8.202']" \ #on l'applique pour toutes les autres IP
+  -e KEEPALIVED_PRIORITY=200 \
+  osixia/keepalived:1.3.5
+```
+
+
+
 
 ## NFS
 
