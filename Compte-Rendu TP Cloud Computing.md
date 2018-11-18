@@ -146,4 +146,4 @@ Là on a des metrics ! Un MAX de metrics ! On a suivi la doc sur Git et on a dé
 
 ## Fin
 
-Tu pourras trouver le VagrantFile utilisé pour configurer et déployer les VMs Workers. Celui pour les managers est sensiblement le même à priori si ce n'est qu'il déploie une machine de plus.
+Tu pourras trouver le VagrantFile utilisé pour configurer et déployer les VMs Workers à la racine du dépôt avec le reste. Celui pour les managers est sensiblement le même à priori si ce n'est qu'il déploie une machine de plus.
