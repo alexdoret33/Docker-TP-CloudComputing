@@ -125,3 +125,25 @@ Voilà pour la machine CentOS. Ensuite, il faut paramétrer les clients (coreOS)
         "name": "data.mount"
       }
 ```
+
+
+**Q2 : expliquez le principe d'un partage NFS, quels pourraient être ses limites dans le cas d'un swarm comme le nôtre (qui peut être amené à grandir) ?**
+
+Un partage NFS est juste un dossier partagé entre plusieurs hôtes.
+Si on ajoute de nouveaux workers ou managers au swarm, il faudra leur ajouter manuellement les autorisations d'accès au dossier partagé.
+
+**Q3 : proposez une façon d'automatiser le déploiement cette conf NFS**
+
+On peut tout automatiser avec le VagrantFile en ajoutant les commandes faites directement dans le fichier. Ainsi, tout se fera au déploiement de la machine.
+
+## Show me your metrics
+
+Là on a des metrics ! Un MAX de metrics ! On a suivi la doc sur Git et on a déployé l'app. Faut dire que le rendu est clairement plutôt stylé ! Voici quelques screens à l'appui.
+
+![](https://i.imgur.com/gdSYcyd.png)
+![](https://i.imgur.com/2FZwDqL.png)
+![](https://i.imgur.com/Mgop9EF.png)
+
+## Fin
+
+Tu pourras trouver le VagrantFile utilisé pour configurer et déployer les VMs Workers. Celui pour les managers est sensiblement le même à priori si ce n'est qu'il déploie une machine de plus.
